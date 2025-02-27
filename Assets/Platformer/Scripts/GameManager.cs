@@ -21,8 +21,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int timeLeft = 300 - (int)Time.time;
-        TimeUI.text = $"Time: {timeLeft}";
+        int timeLeft = 100 - (int)Time.time;
+        if(timeLeft >= 0) {
+            TimeUI.text = $"Time: {timeLeft}";
+        }
+        if(timeLeft <= 0) {
+            UnityEngine.Debug.Log("Fail: You ran out of time");
+        }
 
         if (Input.GetMouseButtonDown(0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -38,9 +43,6 @@ public class GameManager : MonoBehaviour
                     catch(Exception e) {
                         CoinGet();
                     }
-                    // if(block.name.Equals("Question(Clone)")) {
-                    //     CoinGet();
-                    // }
                 }
             }
         }

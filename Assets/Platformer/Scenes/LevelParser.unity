@@ -569,8 +569,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 70
-  maxSpeed: 13
-  jumpImpulse: 30
+  maxSpeed: 10
+  jumpImpulse: 70
   jumpBoostForce: 4
   isGrounded: 0
 --- !u!54 &448287638
@@ -623,6 +623,27 @@ CapsuleCollider:
   m_Height: 7.064553
   m_Direction: 1
   m_Center: {x: -1.3724856e-16, y: 3.721429, z: 0.3101195}
+--- !u!95 &448287641
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448287636}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: daae658e3ae1d8243ac9f1eaeecbfabc, type: 3}
+  m_Controller: {fileID: 9100000, guid: 6076680e49a9639468bd19fb07b47da6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &527888321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -712,6 +733,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: daae658e3ae1d8243ac9f1eaeecbfabc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 448287640}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: daae658e3ae1d8243ac9f1eaeecbfabc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 448287641}
   m_SourcePrefab: {fileID: 100100000, guid: daae658e3ae1d8243ac9f1eaeecbfabc, type: 3}
 --- !u!1 &727678646
 GameObject:

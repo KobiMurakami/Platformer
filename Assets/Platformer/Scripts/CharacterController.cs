@@ -1,5 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Palmmedia.ReportGenerator.Core.Common;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterController : MonoBehaviour
@@ -13,11 +17,16 @@ public class CharacterController : MonoBehaviour
     [Header("Debug Stuff")]
     public bool isGrounded;
     Rigidbody rb;
+    Animator animator;
+
+    public TextMeshProUGUI CoinUI;
+    public TextMeshProUGUI ScoreUI;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -69,5 +78,50 @@ public class CharacterController : MonoBehaviour
             transform.rotation = rotation;
         }
 
+        animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        animator.SetBool("Grounded", isGrounded);
+
+
+        // Checks for block collisions
+        float castDistanceBlock = collider.bounds.extents.y +1;
+        Vector3 startPointBlock = transform.position;
+
+            Ray ray = new Ray(startPointBlock, Vector3.up);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, castDistanceBlock)) {
+                UnityEngine.Debug.Log("Hit Detected");
+                GameObject block = hit.collider.gameObject;
+                if (block != null) {
+                    UnityEngine.Debug.Log("Successful Hit");
+                    UnityEngine.Debug.Log(block.name);
+                    try {
+                        UnityEngine.Debug.Log("Deleting Brick");
+                        block.GetComponent<BlockController>().DestroyBlock();
+                        ScoreIncrease();
+                    }
+                    catch(Exception e) {
+                        UnityEngine.Debug.Log("Deleting QBrick");
+                        GameObject qBlock = hit.collider.gameObject;
+                        qBlock.GetComponent<QuestionController>().DestroyQBlock();
+                        CoinGet();
+                    }
+                }
+            }
+    }
+
+    public void CoinGet() {
+        int number;
+        int.TryParse(CoinUI.text, out number);
+        number++;
+        CoinUI.text = number.ToString();
+        ScoreIncrease();
+    }
+
+    public void ScoreIncrease() {
+        int number;
+        int.TryParse(ScoreUI.text, out number);
+        number += 100;
+        ScoreUI.text = number.ToString();
     }
 }
